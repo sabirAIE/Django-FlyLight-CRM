@@ -1,0 +1,81 @@
+{% extends 'customer/base.html'%}
+{% block content %}
+
+<div class="row" style="font-size: small;">
+
+    <div class="col-md-8">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Customer Information</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col" style="text-align: center;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ customer.name}}</td>
+                        <td>{{ customer.email}}</td>
+                        <td>{{ customer.phone}}</td>
+                        <td style="text-align: center;"><a href="">Edit</a> | <a href="">Delete</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Total Orders- {{total_order}}</h4>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" style="font-size: small;">
+    <div class="col-md-12">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Customers</h4>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Products</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" style="text-align: center;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for order in orders  %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ order.products.name}}</td>
+                    <td>{{ order.products.category}}</td>
+                    <td>{{ order.date_created}}</td>
+                    <td>{{ order.status}}</td>
+                    <td style="text-align: center;"><a href="">Update</a> | <a href="">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+{% endblock%}

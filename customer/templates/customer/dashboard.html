@@ -1,0 +1,40 @@
+{% extends 'customer/base.html'%}
+{% block content %}
+<!-- Status Board -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Total Orders</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{ todays_order }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Order Deliverd</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{delivered_order}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Order Pending</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{pending_orders}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Customer and Products -->
+{% include "customer/dashboard/customer_orders.html" %}
+
+</div>
+{% endblock content %}

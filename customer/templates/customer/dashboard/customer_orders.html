@@ -1,0 +1,76 @@
+<div class="row pt-3" style="font-size: small;">
+
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="my-0 font-weight-normal">Customers</h4>
+            </div>
+            <div class="col-6">
+              <a href="{% url 'new-customer' %}" style="float: right; font-size: medium;">New Customer</a>  
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for customer in customers %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'customer' customer.id %}">{{customer.name}}</a></td>
+                <td>{{ customer.phone}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-8">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="my-0 font-weight-normal">Orders</h4>
+            </div>
+            <div class="col-6">
+              <a href="{% url 'new-order' %}" style="float: right; font-size: medium;">New Order</a>  
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Products</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col" style="text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ order.products}}</td>
+                <td>{{ order.date_created | date:"F d, Y"}}</td>
+                <td>{{ order.status}}</td>
+                <td style="text-align: center;"> <a href="{% url 'update-orders' order.id %}">Update</a>  | <a href="{% url 'delete-order' order.id%}">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+</div>
