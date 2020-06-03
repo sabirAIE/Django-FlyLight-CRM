@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Customer, Product, Tag, Order
 from django.utils import timezone
+from . import forms
+from django.contrib import messages
 # Create your views here.
 def welcome(request):
     todays_order = Order.objects.all().count()
@@ -38,4 +40,15 @@ def NewOrder(request):
     return HttpResponse('hii')
 
 def NewCustomer(request):
-    return HttpResponse('customer')
+    customer_form = forms.createCustomer()
+    if request.method == 'POST':
+        form = forms.createCustomer(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,f'Profile info updated!')
+            return redirect('welcome')
+
+    context = {
+        'form': customer_form,
+    }
+    return render(request, 'customer/new_customer.html', context)
