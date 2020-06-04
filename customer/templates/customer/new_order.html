@@ -2,12 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="row pt-2">
+<div class="row pt-2 align-items-center">
     <div class="col-md-6">
         <form action="" method="POST">
             {% csrf_token%}
             {{form |crispy}}
-            <input type="submit" class="btn btn-sm btn-primary" value="Submit">
+            <input type="submit" class="btn btn-block btn-outline-primary" value="Submit">
         </form>
     </div>
 </div>

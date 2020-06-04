@@ -1,14 +1,18 @@
+{% load crispy_forms_tags %}
 <div class="row pt-3" style="font-size: small;">
 
     <div class="col-md-4">
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
           <div class="row">
-            <div class="col-6">
-              <h4 class="my-0 font-weight-normal">Customers</h4>
+            <div class="col-5">
+              <h5 class="my-0">Customers</h5>
             </div>
-            <div class="col-6">
-              <a href="{% url 'new-customer' %}" style="float: right; font-size: medium;">New Customer</a>  
+            <div class="col-7">
+              <div class="btn-group btn-group-sm float-right" role="group">
+                <a href="{% url 'new-customer' %}" class="btn btn-primary">All</a>
+                <a href="{% url 'new-customer' %}" class="btn btn-secondary">New Customer</a>
+              </div> 
             </div>
           </div>
         </div>
@@ -16,19 +20,23 @@
           <table class="table table-sm table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer</th>
+                <th scope="col">Name</th>
                 <th scope="col">Phone</th>
               </tr>
             </thead>
             <tbody>
+              {% if customers%}
               {% for customer in customers %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td><a href="{% url 'customer' customer.id %}">{{customer.name}}</a></td>
+                <td><a href="{% url 'customer' customer.id %}" style="text-decoration: none;">{{customer.name}}</a></td>
                 <td>{{ customer.phone}}</td>
               </tr>
               {% endfor %}
+              {% else %}
+              <tr>
+                <td colspan="2">None</td>
+              </tr>
+              {% endif%}
             </tbody>
           </table>
         </div>
@@ -40,10 +48,16 @@
         <div class="card-header">
           <div class="row">
             <div class="col-6">
-              <h4 class="my-0 font-weight-normal">Orders</h4>
+              <h5 class="my-0">Orders</h5>
             </div>
             <div class="col-6">
-              <a href="{% url 'new-order' %}" style="float: right; font-size: medium;">New Order</a>  
+              <div class="btn-group btn-group-sm float-right" role="group">
+                <a href="{% url 'new-order' %}" class="btn btn-primary">All</a>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">
+                  Search
+                </button>
+                <a href="{% url 'new-order' %}" class="btn btn-secondary">New Order</a>
+              </div>
             </div>
           </div>
         </div>
@@ -59,6 +73,7 @@
               </tr>
             </thead>
             <tbody>
+              {% if orders%}
               {% for order in orders %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
@@ -68,9 +83,35 @@
                 <td style="text-align: center;"> <a href="{% url 'update-orders' order.id %}">Update</a>  | <a href="{% url 'delete-order' order.id%}">Delete</a></td>
               </tr>
               {% endfor %}
+              {% else%}
+              <tr>
+                <td colspan="5">No Orders found</td>
+              </tr>
+              {%endif%}
             </tbody>
           </table>
         </div>
     </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="GET">
+          {{order_filter.form |crispy}}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info">Search</button>
+      </form>
+      </div>
+    </div>
+  </div>
 </div>

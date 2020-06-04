@@ -4,18 +4,26 @@ from .models import Customer, Product, Tag, Order
 from django.utils import timezone
 from . import forms
 from django.contrib import messages
+from . import filters
 # Create your views here.
 def welcome(request):
     todays_order = Order.objects.all().count()
     delivered_order = Order.objects.filter(status="Delivered").count()
     pending_orders = Order.objects.filter(status="Pending").count()
+    orders = Order.objects.all()
+    order_filter = filters.orderFilters(request.GET, queryset=orders)
+    if request.method =='GET':
+        orders = order_filter.qs
+        
     context = {
         'customers':Customer.objects.all(),
-        'orders':Order.objects.all(),
+        'orders':orders,
         'todays_order':todays_order,
         'delivered_order':delivered_order,
         'pending_orders':pending_orders,
+        'order_filter':order_filter
     }
+
     return render (request, 'customer/dashboard.html', context)
 
 def customers(request,pk):
@@ -58,6 +66,7 @@ def deleteOrder(request,pk):
     return render(request, 'customer/delete_order.html', context)
 
 def newOrder(request):
+
     if request.method == 'POST':
         form = forms.createOrder(request.POST)
         if form.is_valid():
@@ -66,6 +75,21 @@ def newOrder(request):
             return redirect('welcome')
     context = {
         'form':forms.createOrder()
+    }
+
+    return render(request, 'customer/new_order.html', context)
+
+def customerOrder(request,pk):
+    customer_data = Customer.objects.get(id=pk)
+    order_form = forms.createOrder(initial={'customer':customer_data})
+    if request.method == 'POST':
+        form = forms.createOrder(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,f'Order Created')
+            return redirect('customers')
+    context = {
+        'form':order_form
     }
 
     return render(request, 'customer/new_order.html', context)

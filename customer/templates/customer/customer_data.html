@@ -6,7 +6,14 @@
     <div class="col-md-8">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Customer Information</h4>
+              <div class="row">
+                <div class="col-6">
+                  <h5>Customer Information</5>
+                </div>
+                <div class="col-6">
+                  <a href="{% url 'customer-order' customer.id %}" class="btn btn-secondary btn-sm float-right">Place Order</a>
+                </div>
+              </div>
             </div>
             <div class="card-body">
                 <table class="table table-sm table-striped">
@@ -34,17 +41,7 @@
     <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Total Orders</h4>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-                  <h1 class="card-title pricing-card-title">{{total_order}}</h1>
-                </div>
-                <div class="col-6">
-                  <a href="" class="btn btn-info btn-lg">New Order</a>
-                </div>
-              </div>
+              <h4 class="card-title pricing-card-title">{{total_order}}</h4>
             </div>
         </div>
     </div>
@@ -55,7 +52,7 @@
     <div class="col-md-12">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Customers</h4>
+              <h5>Orders</h5>
             </div>
             <div class="card-body">
               <table class="table table-sm table-striped">
@@ -75,7 +72,7 @@
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ order.products.name}}</td>
                     <td>{{ order.products.category}}</td>
-                    <td>{{ order.date_created}}</td>
+                    <td>{{ order.date_created |date:"F-d-Y"}}</td>
                     <td>{{ order.status}}</td>
                     <td style="text-align: center;"><a href="">Update</a> | <a href="">Delete</a></td>
                   </tr>

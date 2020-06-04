@@ -1,14 +1,40 @@
 {% extends 'customer/base.html'%}
 {% block content %}
 
-<div class="row pt-2">
+<div class="row pt-2 "style="font-size: small;" >
     <div class="col-md-6">
-        <h5>Are you sure, delete {{order}}</h5>
-        <form action="{% url 'delete-order' order.id %}" method="POST">
-            {% csrf_token%}
-            <a class="btn btn-sm btn-danger" href="{% url 'welcome' %}">Cancel</a>
-            <input type="submit" class="btn btn-sm btn-primary" value="Submit">
-        </form>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h5 class="my-0">Are you sure?</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" style="text-align: center;">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td>{{order.customer.name}}</td>
+                          <td>{{order.products.name}}</td>
+                          <td>{{order.status}}</td>
+                          <td style="text-align: center;">{{order.date_created |date:"F d, Y"}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+              <div class="float-right">
+                <form action="{% url 'delete-order' order.id %}" method="POST">
+                    {% csrf_token%}
+                    <a class="btn btn-sm btn-danger" href="{% url 'welcome' %}">Cancel</a>
+                    <input type="submit" class="btn btn-sm btn-primary" value="Delete">
+                </form>
+              </div>
+            </div>
+        </div>
     </div>
 </div>
 
