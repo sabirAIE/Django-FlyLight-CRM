@@ -1,13 +1,17 @@
 from django import forms
-from .models import Customer
+from . import models
 from crispy_forms import helper
 
 
 
 
 class createCustomer(forms.ModelForm):
-    
     class Meta:
-        model = Customer
+        model = models.Customer
         fields = "__all__"
 
+
+class createOrder(forms.ModelForm):
+    class Meta:
+        model = models.Order
+        fields = "__all__"

@@ -7,10 +7,14 @@ from . import views
 
 urlpatterns =[
     path('', views.welcome, name="welcome"),
-
+    # order urls
     path('update-order/<int:pk>', views.updateOrder, name="update-orders"),
     path('delete-order/<int:pk>', views.deleteOrder, name="delete-order"),
+    #customer urls
     path('customer/<int:pk>', views.customers, name="customer"),
-    path('new-order', views.NewOrder, name="new-order"),
-    path('new-customer', views.NewCustomer, name="new-customer"),
+    path('new-order', views.newOrder, name="new-order"),
+    path('new-customer', views.newCustomer, name="new-customer"),
+    path('edit-customer/<int:pk>', views.editCustomer, name="edit-customer"),
+    path('delete-customer/<int:pk>', views.deleteCustomer, name="delete-customer"),
+
 ]

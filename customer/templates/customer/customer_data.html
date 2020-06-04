@@ -23,7 +23,7 @@
                         <td>{{ customer.name}}</td>
                         <td>{{ customer.email}}</td>
                         <td>{{ customer.phone}}</td>
-                        <td style="text-align: center;"><a href="">Edit</a> | <a href="">Delete</a></td>
+                        <td style="text-align: center;"><a href="{% url 'edit-customer' customer.id %}">Edit</a> | <a href="{% url 'delete-customer' customer.id%}">Delete</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -34,7 +34,17 @@
     <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Total Orders- {{total_order}}</h4>
+              <h4 class="my-0 font-weight-normal">Total Orders</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <h1 class="card-title pricing-card-title">{{total_order}}</h1>
+                </div>
+                <div class="col-6">
+                  <a href="" class="btn btn-info btn-lg">New Order</a>
+                </div>
+              </div>
             </div>
         </div>
     </div>
