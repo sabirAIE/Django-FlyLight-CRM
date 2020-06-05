@@ -5,6 +5,7 @@ from django.utils import timezone
 from . import forms
 from django.contrib import messages
 from . import filters
+
 # Create your views here.
 def welcome(request):
     todays_order = Order.objects.all().count()
@@ -87,7 +88,8 @@ def customerOrder(request,pk):
         if form.is_valid():
             form.save()
             messages.success(request,f'Order Created')
-            return redirect('customers')
+            return redirect('customer',pk=pk)
+            
     context = {
         'form':order_form
     }
