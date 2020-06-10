@@ -138,3 +138,20 @@ def deleteCustomer(request,pk):
         'customer': customer_data,
     }
     return render(request, 'customer/delete_customer.html', context)
+
+
+def allCustomers(request):
+    all_customers = Customer.objects.all()
+    context = {
+        'customers':all_customers,
+    }
+    return render(request, 'customer/all_customers.html', context)
+
+
+def allOrders(request):
+    all_orders = Order.objects.all()
+    context = {
+        'orders': all_orders,
+    }
+
+    return render(request, 'customer/all_orders.html', context)

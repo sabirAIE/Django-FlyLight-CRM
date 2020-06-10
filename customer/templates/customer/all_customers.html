@@ -1,0 +1,43 @@
+{% extends 'customer/base.html'%}
+{% block content %}
+
+<div class="row pt-2 "style="font-size: small;" >
+    <div class="col-md-12">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h5 class="my-0">All Customers</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {% if customers%}
+                        {% for customer in customers %}
+                        <tr>
+                          <td><a href="{% url 'customer' customer.id %}" style="text-decoration: none;">{{customer.name}}</a></td>
+                          <td>{{ customer.email}}</td>
+                          <td>{{ customer.phone}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                          <td colspan="5">Customers data Not found</td>
+                        </tr>
+                        {% endif%}
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

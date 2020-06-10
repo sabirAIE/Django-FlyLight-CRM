@@ -1,0 +1,49 @@
+{% extends 'customer/base.html'%}
+{% block content %}
+
+<div class="row pt-2 "style="font-size: small;" >
+    <div class="col-md-12">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h5 class="my-0">All Orders</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                          <th scope="col">#</th>
+                        <th scope="col">Product(s)</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" style="text-align: center;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {% if orders %}
+                        {% for order in orders %}
+                        <tr>
+                          <td>{{ forloop.counter}}</td>
+                          <td>{{ order.products.name}}</td>
+                          <td>{{ order.customer.name}}</td>
+                          <td>{{ order.date_created |date:"F d, Y"}}</td>
+                          <td>{{ order.status}}</td>
+                          <td style="text-align: center;"><a href="">Update</a> | <a href="">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                          <td colspan="5">Order data Not found</td>
+                        </tr>
+                        {% endif%}
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
