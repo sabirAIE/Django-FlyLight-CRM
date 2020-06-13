@@ -1,7 +1,9 @@
 from django.db import models
-
+from users import models as userModel
 # Create your models here.
 class Customer(models.Model):
+    user = models.ForeignKey(userModel.adminUsers, on_delete=models.SET_NULL, null=True)
+    
     name = models.CharField(max_length=50, null=True)
     phone = models.CharField(max_length=50, null=True)
     email = models.CharField(max_length=50, null=True)
@@ -37,6 +39,7 @@ class Order(models.Model):
         ('Delivered','Delivered'),
         ('Out for Delivery', 'Out for Delivery')
     ]
+    user = models.ForeignKey(userModel.adminUsers, on_delete=models.SET_NULL, null=True)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     products = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     status = models.CharField(choices=order_status,null=True, max_length=100)

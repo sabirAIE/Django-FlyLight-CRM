@@ -29,7 +29,7 @@
                           <td>{{ order.customer.name}}</td>
                           <td>{{ order.date_created |date:"F d, Y"}}</td>
                           <td>{{ order.status}}</td>
-                          <td style="text-align: center;"><a href="">Update</a> | <a href="">Delete</a></td>
+                          <td style="text-align: center;"><a href="{% url 'update-orders' order.id %}">Update</a> | <a href="{% url 'delete-order' order.id %}">Delete</a></td>
                         </tr>
                         {% endfor %}
                         {% else %}

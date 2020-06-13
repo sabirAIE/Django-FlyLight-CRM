@@ -4,14 +4,16 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from users import views as userViews
 
 urlpatterns =[
     #app navs
     path('', views.welcome, name="welcome"),
+    path('user/login', userViews.adminLogin, name='user'),
+    path('user/logout', userViews.adminLogout, name="user-logout"),
     # order urls
     path('update-order/<int:pk>', views.updateOrder, name="update-orders"),
     path('delete-order/<int:pk>', views.deleteOrder, name="delete-order"),
-    path('new-order', views.newOrder, name="new-order"),
     path('customer-order/<int:pk>', views.customerOrder, name="customer-order"),
     path('orders', views.allOrders, name="all-orders"),
 

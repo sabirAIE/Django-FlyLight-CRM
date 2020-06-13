@@ -32,7 +32,7 @@
         </div>
         {% if messages %}
             {% for message in messages %}
-              <div class="alert alert-{{ message.tags}} text-center">
+              <div class="alert alert-{{ message.tags}} ">
                 {{ message}}
               </div>
             {% endfor %}
@@ -40,11 +40,11 @@
         
         {% csrf_token %}
         <div class="form-group">
-          <input type="email" name="email"  id="inputEmail" class="form-control" placeholder="Email address" required>
+          <input type="email" name="email"  id="inputEmail" class="form-control text-center" placeholder="Email address" required>
         </div>
       
         <div class="form-group">
-          <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input type="password" name="password" id="inputPassword" class="form-control text-center" placeholder="Password" required>
         </div>
       
         <div class="checkbox mb-3 text-center">

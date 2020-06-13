@@ -56,7 +56,6 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                   Search
                 </button>
-                <a href="{% url 'new-order' %}" class="btn btn-secondary">New Order</a>
               </div>
             </div>
           </div>
@@ -65,7 +64,7 @@
           <table class="table table-sm table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">Customer</th>
                 <th scope="col">Products</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
@@ -76,7 +75,7 @@
               {% if orders%}
               {% for order in orders %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{order.customer.name}}</td>
                 <td>{{ order.products}}</td>
                 <td>{{ order.date_created | date:"F d, Y"}}</td>
                 <td>{{ order.status}}</td>

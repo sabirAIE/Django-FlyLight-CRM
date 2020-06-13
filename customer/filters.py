@@ -6,3 +6,4 @@ class orderFilters(django_filters.FilterSet):
         model = models.Order
         feilds = "__all__"
         exclude = ['date_created']
+        exclude = ['customer','user']
